@@ -86,8 +86,10 @@ public class Sistema {
 	}
 	public String imprimeRespostas() {
 		String msg = "Alunos:\n";
+		int cont = 1;
 		for (int i = 0; i < this.respostas.size(); i++) {
-			msg += respostas.get(i)+"\n";
+			msg += cont + ". " + respostas.get(i)+"\n";
+			cont++;
 		}
 		msg = msg.substring(0, msg.length()-1);
 		return msg;

@@ -28,17 +28,17 @@ public class Main {
 				String curso = sc.nextLine();
 				System.out.println(sistema.cadastraAluno(matricula, nome, curso));
 			}
-			if (opcao.equals("E")) {
+			else if (opcao.equals("E")) {
 				System.out.print("Matrícula: ");
 				int matricula = Integer.parseInt(sc.nextLine());
 				System.out.println(sistema.consultaAluno(matricula));
 			}
-			if (opcao.equals("N")) {
+			else if (opcao.equals("N")) {
 				System.out.print("Nome do grupo: ");
 				String nome = sc.nextLine().toLowerCase();
 				System.out.println(sistema.cadastraGrupo(nome));
 			}
-			if (opcao.equals("A")) {
+			else if (opcao.equals("A")) {
 				System.out.println("(A)locar Aluno no Grupo");
 				System.out.println("(I)mprimir Grupos");
 				System.out.print("Opção >> ");
@@ -56,16 +56,19 @@ public class Main {
 					System.out.println(sistema.imprimeGrupo(grupo));
 				}
 			}
-			if(opcao.equals("R")) {
+			else if(opcao.equals("R")) {
 				System.out.print("Matrícula: ");
 				int matricula = Integer.parseInt(sc.nextLine());
 				System.out.println(sistema.cadastraResposta(matricula));
 			}
-			if(opcao.equals("I")) {
+			else if(opcao.equals("I")) {
 				System.out.println(sistema.imprimeRespostas());
 			}
-			if(opcao.equals("O")) {
+			else if(opcao.equals("O")) {
 				break;
+			}
+			else {
+				System.out.println("Opção inválida.");
 			}
 		}
 		
