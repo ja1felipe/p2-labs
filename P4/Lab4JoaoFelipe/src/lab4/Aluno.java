@@ -1,20 +1,37 @@
 package lab4;
 
+/**
+ * Representacao de um aluno.
+ * @author João Felipe da Silva Freitas.
+ *
+ */
 public class Aluno {
 	private String nome;
 	private String curso;
 	private int matricula;
 	
+	/**
+	 * Construtor que constroi um aluo apartir da sua matricula, nome e curso.
+	 * @param matricula
+	 * @param nome
+	 * @param curso
+	 */
 	public Aluno(int matricula, String nome, String curso) {
 		this.nome = nome;
 		this.curso = curso;
 		this.matricula = matricula;
 	}
-	
+	/**
+	 * Gera uma representacao de aluno em String.
+	 * @return retorna uma String.
+	 * */
 	public String toString() {
 		return this.matricula + " - " + this.nome + " - " + this.curso;
 	}
-
+	/**
+	 * Gera uma representacao de aluno em int.
+	 * @return retorna um int.
+	 * */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -22,7 +39,10 @@ public class Aluno {
 		result = prime * result + matricula;
 		return result;
 	}
-
+	/**
+	 * Verifica se dois objetos sao iguais.
+	 * @return retorna um booleano.
+	 * */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

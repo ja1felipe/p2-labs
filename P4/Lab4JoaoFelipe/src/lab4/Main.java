@@ -26,7 +26,11 @@ public class Main {
 				String nome = sc.nextLine();
 				System.out.print("Curso: ");
 				String curso = sc.nextLine();
-				System.out.println(sistema.cadastraAluno(matricula, nome, curso));
+				if (nome.equals("") || curso.equals("")) {
+					System.out.println(("Nome ou curso inválido, cadastro não realizado, tente novamente."));
+				}else {
+					System.out.println(sistema.cadastraAluno(matricula, nome, curso));
+				}
 			}
 			else if (opcao.equals("E")) {
 				System.out.print("Matrícula: ");
@@ -36,7 +40,11 @@ public class Main {
 			else if (opcao.equals("N")) {
 				System.out.print("Nome do grupo: ");
 				String nome = sc.nextLine().toLowerCase();
-				System.out.println(sistema.cadastraGrupo(nome));
+				if (nome.equals("")) {
+					System.out.println(("Nome do curso inválido, cadastro não realizado, tente novamente."));
+				}else {
+					System.out.println(sistema.cadastraGrupo(nome));
+				}
 			}
 			else if (opcao.equals("A")) {
 				System.out.println("(A)locar Aluno no Grupo");

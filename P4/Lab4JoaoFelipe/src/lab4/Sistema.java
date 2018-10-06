@@ -2,17 +2,32 @@ package lab4;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Representacao de um sistema que controla as informacoes recebidas pelo main e sua interecao com as demais classes.
+ * @author João Felipe da Silva Freitas.
+ *
+ */
 public class Sistema {
 	private HashMap <Integer, Aluno> alunos;
 	private HashMap <String, Grupo> grupos;
 	private ArrayList <String> respostas;
 	
+	/**
+	 * Constroi um sistema.
+	 */
 	public Sistema() {
 		this.alunos = new HashMap<>();
 		this.grupos = new HashMap<>();
 		this.respostas = new ArrayList<>();
 	}
 	
+	/**
+	 * Cadastra um novo aluno ao sistema.
+	 * @param matricula - matricula do aluno.
+	 * @param nome - nome do aluno.
+	 * @param curso - curso do aluno.
+	 * @return uma String que confirma ou não se o aluno foi cadastrado.
+	 */
 	public String cadastraAluno(int matricula, String nome, String curso) {
 		String msg = "";
 		Aluno aluno = new Aluno(matricula, nome, curso);
@@ -25,6 +40,11 @@ public class Sistema {
 		return msg;
 	}
 	
+	/**
+	 * Consulta as informacoes de um determinado aluno.
+	 * @param matricula - matricula do aluno.
+	 * @return as informacoes do aluno que possue a matricula passada.
+	 */
 	public String consultaAluno(int matricula) {
 		String msg = "";
 		if (this.alunos.containsKey(matricula)) {
@@ -35,6 +55,11 @@ public class Sistema {
 		return msg;
 	}
 	
+	/**
+	 * Cadastra um novo grupo ao sistema.
+	 * @param nome - nome do grupo.
+	 * @return uma String confirmando ou não se o grupo foi cadastrado.
+	 */
 	public String cadastraGrupo(String nome) {
 		String msg = "";
 		Grupo grupo = new Grupo(nome);
@@ -47,6 +72,12 @@ public class Sistema {
 		return msg;
 	}
 	
+	/**
+	 * Aloca um aluno de matricula X a um determinado grupo.
+	 * @param matricula - matricula do aluno.
+	 * @param grupo - nome do grupo.
+	 * @return uma String confirmando ou não se o aluno foi alocado ao grupo.
+	 */
 	public String alocaNoGrupo(int matricula, String grupo) {
 		String msg = "";
 		if (this.grupos.containsKey(grupo)) {
@@ -65,6 +96,11 @@ public class Sistema {
 		}
 		return msg;
 	}
+	/**
+	 * Imprime os alunos que fazem parte de um determinado grupo.
+	 * @param nome - nome do grupo.
+	 * @return uma String com todos alunos que fazem parte do grupo.
+	 */
 	public String imprimeGrupo(String nome) {
 		String msg = "";
 		if(this.grupos.containsKey(nome)) {
@@ -74,6 +110,11 @@ public class Sistema {
 		}
 		return msg;
 	}
+	/**
+	 * Cadastra que um aluno respondeu uma questao.
+	 * @param matricula - matricula do aluno.
+	 * @return uma String que confirma ou nao se o aluno foi cadastrado na lista de alunos que responderam alguma questao.
+	 */
 	public String cadastraResposta(int matricula) {
 		String msg = "";
 		if (this.alunos.containsKey(matricula)) {
@@ -84,6 +125,10 @@ public class Sistema {
 		}
 		return msg;
 	}
+	/**
+	 * Imprime todos alunos da lista dos que responderam.
+	 * @return uma String com todos alunos que responderam alguma questao.
+	 */
 	public String imprimeRespostas() {
 		String msg = "Alunos:\n";
 		int cont = 1;
