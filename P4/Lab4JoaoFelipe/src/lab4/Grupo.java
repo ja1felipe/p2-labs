@@ -46,10 +46,14 @@ public class Grupo {
 	 * */
 	public String toString() {
 		String msg = "";
-		for (Aluno aluno : alunos) {
-			msg += "* " + aluno.toString() + "\n";
+		if (alunos.size() > 0) {
+			for (Aluno aluno : alunos) {
+				msg += "* " + aluno.toString() + "\n";
+			}
+			msg = msg.substring(0, msg.length()-1);
+			return msg;
+		}else {
+			return "Não há nenhum aluno neste grupo.";
 		}
-		msg = msg.substring(0, msg.length()-1);
-		return msg;
 	}
 }

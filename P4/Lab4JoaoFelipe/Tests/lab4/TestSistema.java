@@ -94,7 +94,14 @@ class TestSistema {
 		String msg = "Grupo inexistente.";
 		assertEquals(msg, sistema.imprimeGrupo("A"));
 	}
-
+	
+	@Test
+	void testImprimeGrupoVazio() {
+		String msg = "Alunos do grupo A:\nNão há nenhum aluno neste grupo.";
+		sistema.cadastraGrupo("A");
+		assertEquals(msg, sistema.imprimeGrupo("A"));
+	}
+	
 	@Test
 	void testCadastraRespostaValida() {
 		sistema.cadastraAluno(1, "F", "CC");
@@ -115,6 +122,11 @@ class TestSistema {
 		sistema.cadastraAluno(2, "F", "CC");
 		sistema.cadastraResposta(2);
 		String msg = "Alunos:\n1. 1 - F - CC\n2. 2 - F - CC";
+		assertEquals(msg, sistema.imprimeRespostas());
+	}
+	@Test
+	void testImprimeRespostasVazias() {
+		String msg = "Nenhum aluno respondeu ainda.";
 		assertEquals(msg, sistema.imprimeRespostas());
 	}
 

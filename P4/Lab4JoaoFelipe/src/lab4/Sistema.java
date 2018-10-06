@@ -132,11 +132,15 @@ public class Sistema {
 	public String imprimeRespostas() {
 		String msg = "Alunos:\n";
 		int cont = 1;
-		for (int i = 0; i < this.respostas.size(); i++) {
-			msg += cont + ". " + respostas.get(i)+"\n";
-			cont++;
+		if (this.respostas.size() > 0) {
+			for (int i = 0; i < this.respostas.size(); i++) {
+				msg += cont + ". " + respostas.get(i)+"\n";
+				cont++;
+			}
+			msg = msg.substring(0, msg.length()-1);
+			return msg;
+		}else {
+			return "Nenhum aluno respondeu ainda.";
 		}
-		msg = msg.substring(0, msg.length()-1);
-		return msg;
 	}
 }

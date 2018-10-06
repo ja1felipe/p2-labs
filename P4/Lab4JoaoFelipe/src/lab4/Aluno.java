@@ -12,9 +12,9 @@ public class Aluno {
 	
 	/**
 	 * Construtor que constroi um aluo apartir da sua matricula, nome e curso.
-	 * @param matricula
-	 * @param nome
-	 * @param curso
+	 * @param matricula - matricula do aluno.
+	 * @param nome - nome do aluno.
+	 * @param curso - curso do aluno.
 	 */
 	public Aluno(int matricula, String nome, String curso) {
 		this.nome = nome;
