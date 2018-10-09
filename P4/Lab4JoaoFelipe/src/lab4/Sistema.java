@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /**
  * Representacao de um sistema que controla as informacoes recebidas pelo main e sua interecao com as demais classes.
- * @author João Felipe da Silva Freitas.
+ * @author Joï¿½o Felipe da Silva Freitas.
  *
  */
 public class Sistema {
@@ -26,7 +26,7 @@ public class Sistema {
 	 * @param matricula - matricula do aluno.
 	 * @param nome - nome do aluno.
 	 * @param curso - curso do aluno.
-	 * @return uma String que confirma ou não se o aluno foi cadastrado.
+	 * @return uma String que confirma ou nï¿½o se o aluno foi cadastrado.
 	 */
 	public String cadastraAluno(int matricula, String nome, String curso) {
 		String msg = "";
@@ -50,7 +50,7 @@ public class Sistema {
 		if (this.alunos.containsKey(matricula)) {
 			msg = "Aluno: " + this.alunos.get(matricula).toString();
 		}else {
-			msg = "Aluno não cadastrado.";
+			msg = "Aluno nao cadastrado.";
 		}
 		return msg;
 	}
@@ -58,7 +58,7 @@ public class Sistema {
 	/**
 	 * Cadastra um novo grupo ao sistema.
 	 * @param nome - nome do grupo.
-	 * @return uma String confirmando ou não se o grupo foi cadastrado.
+	 * @return uma String confirmando ou nï¿½o se o grupo foi cadastrado.
 	 */
 	public String cadastraGrupo(String nome) {
 		String msg = "";
@@ -67,7 +67,7 @@ public class Sistema {
 			this.grupos.put(nome, grupo);
 			msg = "Grupo cadastrado com sucesso.";
 		}else {
-			msg = "Grupo já existente.";
+			msg = "Grupo ja existente.";
 		}
 		return msg;
 	}
@@ -76,7 +76,7 @@ public class Sistema {
 	 * Aloca um aluno de matricula X a um determinado grupo.
 	 * @param matricula - matricula do aluno.
 	 * @param grupo - nome do grupo.
-	 * @return uma String confirmando ou não se o aluno foi alocado ao grupo.
+	 * @return uma String confirmando ou nï¿½o se o aluno foi alocado ao grupo.
 	 */
 	public String alocaNoGrupo(int matricula, String grupo) {
 		String msg = "";
@@ -86,13 +86,13 @@ public class Sistema {
 					this.grupos.get(grupo).cadastraAluno(this.alunos.get(matricula));
 					msg = "Aluno alocado com sucesso.";
 				}else {
-					msg = "Aluno já cadastrado.";
+					msg = "Aluno ja cadastrado.";
 				}
 			}else {
 				msg = "Aluno inexistente.";
 			}
 		}else {
-			msg = "Não existe um grupo com este nome.";
+			msg = "Nao existe um grupo com este nome.";
 		}
 		return msg;
 	}
@@ -121,7 +121,7 @@ public class Sistema {
 			this.respostas.add(this.alunos.get(matricula).toString());
 			msg = "Resposta cadastrada com sucesso.";
 		}else {
-			msg = "Não existe aluno com essa matricula cadastrada.";
+			msg = "Nao existe aluno com essa matricula cadastrada.";
 		}
 		return msg;
 	}

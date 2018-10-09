@@ -2,7 +2,7 @@ package lab4;
 
 /**
  * Representacao de um aluno.
- * @author João Felipe da Silva Freitas.
+ * @author Joï¿½o Felipe da Silva Freitas.
  *
  */
 public class Aluno {
@@ -17,6 +17,12 @@ public class Aluno {
 	 * @param curso - curso do aluno.
 	 */
 	public Aluno(int matricula, String nome, String curso) {
+		if (nome.equals("") || curso.equals("")) {
+			throw new IllegalArgumentException();
+		}
+		if (nome == null || curso == null) {
+			throw new NullPointerException();
+		}
 		this.nome = nome;
 		this.curso = curso;
 		this.matricula = matricula;

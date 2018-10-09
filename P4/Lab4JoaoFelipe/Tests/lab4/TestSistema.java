@@ -31,7 +31,7 @@ class TestSistema {
 	}
 	@Test
 	void testConsultaAlunoInvalido() {
-		String msg = "Aluno não cadastrado.";
+		String msg = "Aluno nao cadastrado.";
 		assertEquals(msg, sistema.consultaAluno(2));
 	}
 
@@ -42,7 +42,7 @@ class TestSistema {
 	}
 	@Test
 	void testCadastraGrupoInvalido() {
-		String msg = "Grupo já existente.";
+		String msg = "Grupo ja existente.";
 		sistema.cadastraGrupo("teste");
 		assertEquals(msg, sistema.cadastraGrupo("teste"));
 	}
@@ -60,7 +60,7 @@ class TestSistema {
 		sistema.cadastraGrupo("teste");
 		sistema.cadastraAluno(1, "F", "CC");
 		sistema.alocaNoGrupo(1, "teste");
-		String msg = "Aluno já cadastrado.";
+		String msg = "Aluno ja cadastrado.";
 		assertEquals(msg, sistema.alocaNoGrupo(1, "teste"));
 	}
 	
@@ -74,7 +74,7 @@ class TestSistema {
 	@Test
 	void testAlocaNoGrupoInexistente() {
 		sistema.cadastraAluno(1, "F", "CC");
-		String msg = "Não existe um grupo com este nome.";
+		String msg = "Nao existe um grupo com este nome.";
 		assertEquals(msg, sistema.alocaNoGrupo(1, "teste"));
 	}
 	
@@ -97,7 +97,7 @@ class TestSistema {
 	
 	@Test
 	void testImprimeGrupoVazio() {
-		String msg = "Alunos do grupo A:\nNão há nenhum aluno neste grupo.";
+		String msg = "Alunos do grupo A:\nNao ha nenhum aluno neste grupo.";
 		sistema.cadastraGrupo("A");
 		assertEquals(msg, sistema.imprimeGrupo("A"));
 	}
@@ -111,7 +111,7 @@ class TestSistema {
 
 	@Test
 	void testCadastraRespostaInvalida() {
-		String msg = "Não existe aluno com essa matricula cadastrada.";
+		String msg = "Nao existe aluno com essa matricula cadastrada.";
 		assertEquals(msg, sistema.cadastraResposta(1));
 	}
 	
