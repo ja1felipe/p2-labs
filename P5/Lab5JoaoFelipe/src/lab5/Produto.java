@@ -1,4 +1,4 @@
-package lab5.joao.felipe;
+package lab5;
 
 public class Produto {
 	private String nome;
@@ -6,6 +6,11 @@ public class Produto {
 	private double preco;
 	
 	public Produto(String nome, String descricao, double preco) {
+		if(nome == null || descricao == null) {
+			throw new NullPointerException("Nome ou descricao nulo");
+		}else if("".equals(nome) || "".equals(descricao)) {
+			throw new IllegalArgumentException("Nome ou descricao invalido");
+		}
 		this.nome = nome;
 		this.descricao = descricao;
 		this.preco = preco;
@@ -15,9 +20,12 @@ public class Produto {
 		this.preco = preco;
 	}
 	
+	public String getNomeProduto() {
+		return this.nome;
+	}
 	@Override
 	public String toString() {
-		String msg = this.nome + " - " + this.descricao + " - " + this.preco;
+		String msg = this.nome + " - " + this.descricao + " - " + "R$" + this.preco;
 		return msg;
 	}
 	

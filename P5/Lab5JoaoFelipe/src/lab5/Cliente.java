@@ -1,4 +1,4 @@
-package lab5.joao.felipe;
+package lab5;
 
 public class Cliente {
 	
@@ -8,6 +8,11 @@ public class Cliente {
 	private String local;
 	
 	public Cliente(String cpf, String nome, String email, String local) {
+		if(cpf == null || nome == null || email == null || local == null) {
+			throw new NullPointerException("Cpf, nome, email ou local nulo");
+		}else if("".equals(nome) || "".equals(email) || "".equals(local) || "".equals(cpf)) {
+			throw new IllegalArgumentException("Cpf, nome, email ou local invalido");
+		}
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;
