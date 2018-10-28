@@ -55,7 +55,7 @@ public class SistemaFornecedores {
 			if(!"".equals(email)) {
 				this.fornecedores.get(nome).setEmail(email);
 			}if(!"".equals(telefone)) {
-				this.fornecedores.get(nome).setEmail(telefone);
+				this.fornecedores.get(nome).setTelefone(telefone);
 			}
 			return true;
 		}else {
@@ -95,12 +95,15 @@ public class SistemaFornecedores {
 	public String listaTodosProdutos() {
 		String msg = "";
 		if(this.fornecedores.size() < 1) {
-			return "Nao ha fornecedores cadastrados";
+			throw new NullPointerException();
 		}
 		for(String f : this.fornecedores.keySet()) {
 			if(!this.fornecedores.get(f).listaProdutos().equals("")) {
 				msg += this.fornecedores.get(f).listaProdutos() + " | ";
 			}
+		}
+		if("".equals(msg)) {
+			throw new NullPointerException();
 		}
 		return msg.substring(0, msg.length()-3);
 	}
