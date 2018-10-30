@@ -1,5 +1,7 @@
 package lab5;
 
+import easyaccept.EasyAccept;
+
 public class Facade {
 	
 	private SistemaClientes sistemaClientes;
@@ -10,24 +12,25 @@ public class Facade {
 		this.sistemaFornecedores = new SistemaFornecedores();
 	}
 	
-	public boolean cadastrarCliente(String cpf, String nome, String email, String local) {
-		return sistemaClientes.cadastrarCliente(cpf, nome, email, local);
+	public String adicionaCliente(String cpf, String nome, String email, String local) {
+		sistemaClientes.cadastrarCliente(cpf, nome, email, local);
+		return cpf;
 	}
 	
-	public String imprimeCliente(String cpf) {
+	public String exibeCliente(String cpf) {
 		return sistemaClientes.imprimeCliente(cpf);
 	}
 	
-	public String imprimeTodosClientes() {
+	public String exibeClientes() {
 		return sistemaClientes.imprimeTodosClientes();
 	}
 	
-	public boolean removerCliente(String cpf) {
+	public boolean removeCliente(String cpf) {
 		return sistemaClientes.removerCliente(cpf);
 	}
 	
-	public boolean editarCliente(String cpf, String nome, String email, String local) {
-		return sistemaClientes.editarCliente(cpf, nome, email, local);
+	public boolean editaCliente(String cpf, String atributo, String novo) {
+		return sistemaClientes.editarCliente(cpf, atributo, novo);
 	}
 	
 	public boolean cadastrarFornecedor(String nome, String email, String telefone) {
@@ -73,4 +76,9 @@ public class Facade {
 	public boolean editaProduto(String fornecedor, String produto, double valor) {
 		return sistemaFornecedores.editaProduto(fornecedor, produto, valor);
 	}
+	
+	public static void main(String[] args) {
+		args = new String[] { "lab5.Facade", "Testes/use_case_1.txt" };
+		EasyAccept.main(args);
+	}	
 }

@@ -15,17 +15,17 @@ public class SistemaClientes {
 	
 	public boolean cadastrarCliente(String cpf, String nome, String email, String local) {
 		Cliente c = new Cliente(cpf, nome, email, local);
-		if (!this.clientes.containsKey(cpf)) {
+		if (this.clientes.containsKey(cpf)) {
+			throw new IllegalArgumentException("Erro no cadastro do cliente: cliente ja existe.");
+		}else {
 			this.clientes.put(cpf, c);
 			return true;
-		}else {
-			return false;
 		}
 	}
 	
 	public String imprimeCliente(String cpf) {
 		if (!this.clientes.containsKey(cpf)) {
-			throw new IllegalArgumentException("Cliente inexistente");
+			throw new IllegalArgumentException("Erro na exibicao do cliente: cliente nao existe.");
 		}
 		return this.clientes.get(cpf).toString();
 	}
@@ -56,22 +56,29 @@ public class SistemaClientes {
 		}
 	}
 	
-	public boolean editarCliente(String cpf, String nome, String email, String local) {
-		if (this.clientes.containsKey(cpf)) {
-			if(!"".equals(nome)) {
-				this.clientes.get(cpf).setNome(nome);
-			}if(!"".equals(email)) {
-				this.clientes.get(cpf).setEmail(email);
-			}if(!"".equals(local)) {
-				this.clientes.get(cpf).setLocal(local);
-			}
+	public boolean editarCliente(String cpf, String atributo, String novo) {
+		if (!this.clientes.containsKey(cpf)) {
+			throw new IllegalArgumentException("Erro na edicao do cliente: cliente nao existe.");
+		}else if(novo.equals("") || novo == null) {
+			throw new IllegalArgumentException("Erro na edicao do cliente: novo valor nao pode ser vazio ou nulo.");
+		}else if(atributo.equals("") || atributo == null) {
+			throw new IllegalArgumentException("Erro na edicao do cliente: atributo nao pode ser vazio ou nulo.");
+		}
+		switch (atributo) {
+		case ("nome"): 
+			this.clientes.get(cpf).setNome(novo);
 			return true;
-		}else {
-			return false;
+		case("email"):
+			this.clientes.get(cpf).setEmail(novo);
+		return true;
+		case("local"):
+			this.clientes.get(cpf).setLocal(novo);
+			return true;
+		default:
+			throw new IllegalArgumentException("Erro na edicao do cliente: atributo nao existe.");
 		}
 	}
-	
-	
-	
-	
 }
+	
+	
+

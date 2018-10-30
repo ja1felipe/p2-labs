@@ -8,10 +8,14 @@ public class Cliente {
 	private String local;
 	
 	public Cliente(String cpf, String nome, String email, String local) {
-		if(cpf == null || nome == null || email == null || local == null) {
-			throw new NullPointerException("Cpf, nome, email ou local nulo");
-		}else if("".equals(nome) || "".equals(email) || "".equals(local) || "".equals(cpf)) {
-			throw new IllegalArgumentException("Cpf, nome, email ou local invalido");
+		if(nome == null || "".equals(nome)) {
+			throw new IllegalArgumentException("Erro no cadastro do cliente: nome nao pode ser vazio ou nulo.");
+		}else if(email == null || "".equals(email)) {
+			throw new IllegalArgumentException("Erro no cadastro do cliente: email nao pode ser vazio ou nulo.");
+		}else if(local == null || "".equals(local)) {
+			throw new IllegalArgumentException("Erro no cadastro do cliente: localizacao nao pode ser vazia ou nula.");
+		}else if(cpf.length() != 11) {
+			throw new IllegalArgumentException("Erro no cadastro do cliente: cpf invalido.");
 		}
 		this.cpf = cpf;
 		this.nome = nome;
