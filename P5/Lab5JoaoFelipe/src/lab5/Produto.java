@@ -2,11 +2,22 @@ package lab5;
 
 import java.text.DecimalFormat;
 
+/**
+ * Representacao de um produto.
+ * @author Joao Felipe da Silva Freitas.
+ *
+ */
 public class Produto {
 	private String nome;
 	private String descricao;
 	private double preco;
 	
+	/**
+	 * Constroi um produto apatir do seu nome, descricao e preco.
+	 * @param nome nome do produto.
+	 * @param descricao descricao do produto.
+	 * @param preco preco do produto.
+	 */
 	public Produto(String nome, String descricao, double preco) {
 		if(nome == null || "".equals(nome)) {
 			throw new IllegalArgumentException("Erro no cadastro de produto: nome nao pode ser vazio ou nulo.");
@@ -21,10 +32,21 @@ public class Produto {
 	}
 		
 	
+	/**
+	 * Seta o preco do produto.
+	 * @param preco preco do produto.
+	 */
 	public void setPreco(double preco) {
+		if(preco < 0) {
+			throw new IllegalArgumentException("Erro no cadastro de produto: preco invalido.");
+		}
 		this.preco = preco;
 	}
 	
+	/**
+	 * Pega o nome do produto.
+	 * @return o nome do produto.
+	 */
 	public String getNomeProduto() {
 		return this.nome;
 	}
