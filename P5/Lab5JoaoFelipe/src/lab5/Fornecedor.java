@@ -1,5 +1,7 @@
 package lab5;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,15 +13,17 @@ public class Fornecedor {
 	private Set<Produto> produtos;
 	
 	public Fornecedor(String nome, String email, String telefone) {
-		if(nome == null || email == null || telefone == null) {
-			throw new NullPointerException("Nome, email ou telefone nulo");
-		}else if("".equals(nome) || "".equals(email) || "".equals(telefone)) {
-			throw new IllegalArgumentException("Nome, email ou telefone invalido");
+		if(nome == null || "".equals(nome)) {
+			throw new IllegalArgumentException("Erro no cadastro do fornecedor: nome nao pode ser vazio ou nulo.");
+		}else if(email == null || "".equals(email)) {
+			throw new IllegalArgumentException("Erro no cadastro do fornecedor: email nao pode ser vazio ou nulo.");
+		}else if(telefone == null || "".equals(telefone)) {
+			throw new IllegalArgumentException("Erro no cadastro do fornecedor: localizacao nao pode ser vazia ou nula.");
 		}
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
-		this.produtos = new HashSet<Produto>();
+		this.produtos = new HashSet<>();
 	}
 	
 	public void setEmail(String email) {
@@ -31,21 +35,28 @@ public class Fornecedor {
 	}
 
 	public boolean cadastraProduto(Produto p) {
-		if(!this.produtos.contains(p)) {
-			this.produtos.add(p);
-			return true;
+		if(this.produtos.contains(p)) {
+			throw new IllegalArgumentException("Erro no cadastro de produto: produto ja existe.");
 		}
-		return false;
+		this.produtos.add(p);
+		return true;
 	}
 	
 	public boolean removeProduto(String nome) {
+		boolean flag = false;
 		for(Produto produto : this.produtos) {
 			if(produto.getNomeProduto().equals(nome)) {
 				Produto p = produto;
 				this.produtos.remove(p);
-				return true;
+				flag = true;
+				break;
 			}
-		}return false;
+		}
+		if (flag) {
+			return flag;
+		}else {
+			throw new IllegalArgumentException("Erro na remocao de produto: produto nao existe.");
+		}
 	}
 	
 	public String imprimeProduto(String nome) {
@@ -58,7 +69,7 @@ public class Fornecedor {
 				break;
 			}
 		}if (!achou) {
-			throw new IllegalArgumentException("Produto nao cadastrado");
+			throw new IllegalArgumentException("Erro na exibicao de produto: produto nao existe.");
 		}
 		return msg;
 	}
@@ -69,9 +80,18 @@ public class Fornecedor {
 			msg = "";
 			return msg;
 		}
+		ArrayList<String> auxiliar = new ArrayList<>();
 		for(Produto produto : this.produtos) {
-			msg += this.nome + " - " + produto.toString() + " | ";
-		}msg = msg.substring(0, msg.length()-3);
+			msg = this.nome + " - " + produto.toString() + " | ";
+			auxiliar.add(msg);
+		}
+		Collections.sort(auxiliar);
+		msg = "";
+		for (int i = 0; i < auxiliar.size(); i++) {
+			msg += auxiliar.get(i) ;
+		}
+		
+		msg = msg.substring(0, msg.length()-3);
 		return msg;
 	}
 	

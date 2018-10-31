@@ -71,7 +71,7 @@ public class SistemaClientes {
 		case("email"):
 			this.clientes.get(cpf).setEmail(novo);
 		return true;
-		case("local"):
+		case("localizacao"):
 			this.clientes.get(cpf).setLocal(novo);
 			return true;
 		default:

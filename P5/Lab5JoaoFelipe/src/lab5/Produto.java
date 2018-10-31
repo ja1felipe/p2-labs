@@ -1,20 +1,25 @@
 package lab5;
 
+import java.text.DecimalFormat;
+
 public class Produto {
 	private String nome;
 	private String descricao;
 	private double preco;
 	
 	public Produto(String nome, String descricao, double preco) {
-		if(nome == null || descricao == null) {
-			throw new NullPointerException("Nome ou descricao nulo");
-		}else if("".equals(nome) || "".equals(descricao)) {
-			throw new IllegalArgumentException("Nome ou descricao invalido");
+		if(nome == null || "".equals(nome)) {
+			throw new IllegalArgumentException("Erro no cadastro de produto: nome nao pode ser vazio ou nulo.");
+		}else if(descricao == null || "".equals(descricao)) {
+			throw new IllegalArgumentException("Erro no cadastro de produto: descricao nao pode ser vazia ou nula.");
+		}else if(preco < 0) {
+			throw new IllegalArgumentException("Erro no cadastro de produto: preco invalido.");
 		}
 		this.nome = nome;
 		this.descricao = descricao;
 		this.preco = preco;
 	}
+		
 	
 	public void setPreco(double preco) {
 		this.preco = preco;
@@ -25,7 +30,8 @@ public class Produto {
 	}
 	@Override
 	public String toString() {
-		String msg = this.nome + " - " + this.descricao + " - " + "R$" + this.preco;
+		String resultado = String.format("%.2f", this.preco);
+		String msg = this.nome + " - " + this.descricao + " - " + "R$" + resultado;
 		return msg;
 	}
 	

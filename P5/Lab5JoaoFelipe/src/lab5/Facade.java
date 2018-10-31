@@ -33,52 +33,53 @@ public class Facade {
 		return sistemaClientes.editarCliente(cpf, atributo, novo);
 	}
 	
-	public boolean cadastrarFornecedor(String nome, String email, String telefone) {
-		return sistemaFornecedores.cadastrarFornecedor(nome, email, telefone);
+	public String adicionaFornecedor(String nome, String email, String telefone) {
+		sistemaFornecedores.cadastrarFornecedor(nome, email, telefone);
+		return nome;
 	}
 	
-	public String imprimeFornecedor(String nome) {
+	public String exibeFornecedor(String nome) {
 		return sistemaFornecedores.imprimeFornecedor(nome);
 	}
 	
-	public String imprimeFornecedores() {
+	public String exibeFornecedores() {
 		return sistemaFornecedores.imprimeFornecedores();
 	}
 	
-	public boolean removerFornecedor(String nome) {
+	public boolean removeFornecedor(String nome) {
 		return sistemaFornecedores.removerFornecedor(nome);
 	}
 	
-	public boolean editarFornecedor(String nome, String email, String telefone) {
-		return sistemaFornecedores.editarFornecedor(nome, email, telefone);
+	public boolean editaFornecedor(String nome, String email, String telefone) {
+		return sistemaFornecedores.editaFornecedor(nome, email, telefone);
 	}
 	
-	public boolean cadastraProduto(String fornecedor, String produto, String descricao, double valor) {
-		return sistemaFornecedores.cadastraProduto(fornecedor, produto, descricao, valor);
+	public boolean adicionaProduto(String fornecedor, String produto, String descricao, double preco) {
+		return sistemaFornecedores.cadastraProduto(fornecedor, produto, descricao, preco);
 	}
 	
-	public boolean removerProduto(String fornecedor, String produto) {
-		return sistemaFornecedores.removerProduto(fornecedor, produto);
+	public boolean removeProduto(String produto, String descricao, String fornecedor) {
+		return sistemaFornecedores.removerProduto(fornecedor, produto, descricao);
 	}
 	
-	public String imprimeProduto(String fornecedor, String produto) {
-		return sistemaFornecedores.imprimeProduto(fornecedor, produto);
+	public String exibeProduto(String produto, String descricao, String fornecedor) {
+		return sistemaFornecedores.imprimeProduto(produto, descricao, fornecedor);
 	}
 	
-	public String listaProdutosDeFornecedor(String fornecedor) {
+	public String exibeProdutosFornecedor(String fornecedor) {
 		return sistemaFornecedores.listaProdutosDeFornecedor(fornecedor);
 	}
 	
-	public String listaTodosProdutos() {
+	public String exibeProdutos() {
 		return sistemaFornecedores.listaTodosProdutos();
 	}
 	
-	public boolean editaProduto(String fornecedor, String produto, double valor) {
-		return sistemaFornecedores.editaProduto(fornecedor, produto, valor);
+	public boolean editaProduto(String produto, String descricao, String fornecedor, double novoPreco) {
+		return sistemaFornecedores.editaProduto(fornecedor, produto, descricao, novoPreco);
 	}
 	
 	public static void main(String[] args) {
-		args = new String[] { "lab5.Facade", "Testes/use_case_1.txt" };
+		args = new String[] { "lab5.Facade", "Testes/use_case_1.txt", "Testes/use_case_2.txt", "Testes/use_case_3.txt" };
 		EasyAccept.main(args);
 	}	
 }
