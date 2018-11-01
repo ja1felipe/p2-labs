@@ -126,7 +126,7 @@ public class SistemaFornecedores {
 		else if(!this.fornecedores.containsKey(fornecedor)) {
 			throw new IllegalArgumentException("Erro no cadastro de produto: fornecedor nao existe.");
 		}
-		Produto p = new Produto(produto, descricao, valor);
+		Produto p = new ProdutoSimples(produto, descricao, valor);
 		return this.fornecedores.get(fornecedor).cadastraProduto(p);
 	}
 	
