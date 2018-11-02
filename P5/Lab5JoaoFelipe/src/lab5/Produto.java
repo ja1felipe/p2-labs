@@ -5,5 +5,5 @@ public interface Produto {
 	public String toString();
 	public String getNomeProduto();
 	public void setPreco(double preco);
-
+	public boolean equals(Object obj);
 }

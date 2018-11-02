@@ -74,14 +74,14 @@ class TesteFornecedor {
 	@Test
 	void cadastraProdutoValido() {
 		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
-		Produto p = new Produto("Arroz","Arroz",5.00);
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
 		assertEquals(true, c.cadastraProduto(p));
 	}
 	
 	@Test
 	void cadastraProdutoInvalido() {
 		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
-		Produto p = new Produto("Arroz","Arroz",5.00);
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
 		c.cadastraProduto(p);
 		try {
 			c.cadastraProduto(p);
@@ -94,17 +94,17 @@ class TesteFornecedor {
 	@Test
 	void removeProdutoValido() {
 		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
-		Produto p = new Produto("Arroz","Arroz",5.00);
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
 		c.cadastraProduto(p);
-		assertEquals(true, c.removeProduto("Arroz"));
+		assertEquals(true, c.removeProduto("Arroz", "Arroz"));
 	}
 	
 	@Test
 	void removeProdutoInvalido() {
 		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
-		Produto p = new Produto("Arroz","Arroz",5.00);
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
 		try {
-			c.removeProduto("Arroz");
+			c.removeProduto("Arroz","Arroz");
 		}catch (IllegalArgumentException e) {
 			assertEquals("Erro na remocao de produto: produto nao existe.", e.getMessage());
 		}
@@ -113,17 +113,17 @@ class TesteFornecedor {
 	@Test
 	void exibeProdutoValido() {
 		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
-		Produto p = new Produto("Arroz","Arroz",5.00);
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
 		c.cadastraProduto(p);
 		String msg = "Arroz - Arroz - R$5,00";
-		assertEquals(msg, c.imprimeProduto("Arroz"));
+		assertEquals(msg, c.imprimeProduto("Arroz", "Arroz"));
 	}
 	
 	@Test
 	void exibeProdutoInvalido() {
 		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
 		try {
-			c.imprimeProduto("Arroz");
+			c.imprimeProduto("Arroz", "Arroz");
 		}catch (IllegalArgumentException e) {
 			assertEquals("Erro na exibicao de produto: produto nao existe.", e.getMessage());
 		}
@@ -132,8 +132,8 @@ class TesteFornecedor {
 	@Test
 	void listProdutos() {
 		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
-		Produto p = new Produto("Arroz","Arroz",5.00);
-		Produto p2 = new Produto("Aarroz","Arroz",5.00);
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
+		Produto p2 = new ProdutoSimples("Aarroz","Arroz",5.00);
 		c.cadastraProduto(p);
 		c.cadastraProduto(p2);
 		String msg = "Felipe - Aarroz - Arroz - R$5,00 | Felipe - Arroz - Arroz - R$5,00";
@@ -143,16 +143,16 @@ class TesteFornecedor {
 	@Test
 	void editaProdutoValido() {
 		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
-		Produto p = new Produto("Arroz","Arroz",5.00);
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
 		c.cadastraProduto(p);
-		assertEquals(true, c.editaProduto("Arroz", 4.00));
+		assertEquals(true, c.editaProduto("Arroz", "Arroz", 4.00));
 	}
 	
 	@Test
 	void editaProdutoInvalido() {
 		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
-		Produto p = new Produto("Arroz","Arroz",5.00);
-		assertEquals(false, c.editaProduto("Cuscuz", 4.00));
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
+		assertEquals(false, c.editaProduto("Cuscuz", "Cuscuz", 4.00));
 	}
 	
 	@Test

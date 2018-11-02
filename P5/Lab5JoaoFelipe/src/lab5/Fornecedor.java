@@ -72,15 +72,59 @@ public class Fornecedor {
 		return true;
 	}
 	
+	public boolean cadastraCombo(String produto, String descricao, double fator, String[] produtosPassados) {
+		if(produto == null || "".equals(produto)) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: nome nao pode ser vazio ou nulo.");
+		}else if(descricao == null || "".equals(descricao)) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: descricao nao pode ser vazia ou nula.");
+		}else if(fator < 0 || fator > 1) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: fator invalido.");
+		}
+		for (Produto produtosIguais : this.produtos) {
+			if(produtosIguais.getNomeProduto().equals(produto+descricao)) {
+				throw new IllegalArgumentException("Erro no cadastro de combo: combo ja existe.");
+			}
+		}		
+		Produto p = new ProdutoCombo(produto, descricao, fator, this.arrumaOsProdutosDoCombo(produtosPassados));
+		this.produtos.add(p);
+		return true;
+	}
+	
+	private ProdutoSimples[] arrumaOsProdutosDoCombo(String[] produtosPassados) {
+		boolean flag = false;
+		ProdutoSimples[] parametros = new ProdutoSimples[produtosPassados.length];
+		for (int i = 0; i < produtosPassados.length; i++) {
+			String[] dividido = produtosPassados[i].split(" - ");
+			for (Produto comida : this.produtos) {
+				flag = false;
+				if(comida.getNomeProduto().equals(dividido[0]+dividido[1])) {
+					try {
+						ProdutoSimples p = (ProdutoSimples) comida;
+						parametros[i] = p;
+						flag = true;
+						break;
+					}
+					catch (ClassCastException e) {
+						throw new ClassCastException("Não é possivel criar um combo com um produto que já é um combo");
+					}	
+				}
+			}
+			if (!flag) {
+				throw new IllegalArgumentException("Erro no cadastro de combo: produto nao existe.");
+			}
+		}
+		return parametros;
+	}
+	
 	/**
 	 * Remove um produto do fornecedor apartir do nome do produto.
 	 * @param nome nome do produto.
 	 * @return retorna um booleano True caso o produto seja removido com sucesso.
 	 */
-	public boolean removeProduto(String nome) {
+	public boolean removeProduto(String nome, String descricao) {
 		boolean flag = false;
 		for(Produto produto : this.produtos) {
-			if(produto.getNomeProduto().equals(nome)) {
+			if(produto.getNomeProduto().equals(nome+descricao)) {
 				Produto p = produto;
 				this.produtos.remove(p);
 				flag = true;
@@ -99,11 +143,11 @@ public class Fornecedor {
 	 * @param nome nome do produto.
 	 * @return uma String no formato PRODUTO - DESCRICAO - PRECO.
 	 */
-	public String imprimeProduto(String nome) {
+	public String imprimeProduto(String nome, String descricao) {
 		boolean achou = false;
 		String msg = "";
 		for(Produto produto : this.produtos) {
-			if(produto.getNomeProduto().equals(nome)) {
+			if(produto.getNomeProduto().equals(nome+descricao)) {
 				achou = true;
 				msg = produto.toString();
 				break;
@@ -144,9 +188,9 @@ public class Fornecedor {
 	 * @param valor novo valor do produto.
 	 * @return retorna um booleano True caso a edicao seja um sucesso.
 	 */
-	public boolean editaProduto(String nome, double valor) {
+	public boolean editaProduto(String nome, String descricao, double valor) {
 		for(Produto produto : this.produtos) {
-			if(produto.getNomeProduto().equals(nome)) {
+			if(produto.getNomeProduto().equals(nome+descricao)) {
 				produto.setPreco(valor);
 				return true;
 			}

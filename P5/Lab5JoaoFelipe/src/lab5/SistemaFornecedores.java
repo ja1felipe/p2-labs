@@ -130,6 +130,19 @@ public class SistemaFornecedores {
 		return this.fornecedores.get(fornecedor).cadastraProduto(p);
 	}
 	
+	public boolean cadastraCombo(String fornecedor, String produto, String descricao, double fator, String produtos) {
+		if(fornecedor == null || "".equals(fornecedor)){
+			throw new IllegalArgumentException("Erro no cadastro de combo: fornecedor nao pode ser vazio ou nulo.");
+		}
+		else if(!this.fornecedores.containsKey(fornecedor)) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: fornecedor nao existe.");
+		}else if(produtos.equals("") || produtos == null) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: combo deve ter produtos.");
+		}
+		String[] produtosPassados = produtos.split(", ");
+		return this.fornecedores.get(fornecedor).cadastraCombo(produto, descricao, fator, produtosPassados);
+	}
+	
 	/**
 	 * Remove um produto valido de um determinado fornecedor.
 	 * @param produto nome do produto.
@@ -147,7 +160,7 @@ public class SistemaFornecedores {
 		}else if(!this.fornecedores.containsKey(fornecedor)) {
 			throw new IllegalArgumentException("Erro na remocao de produto: fornecedor nao existe.");
 		}
-		return this.fornecedores.get(fornecedor).removeProduto(produto);
+		return this.fornecedores.get(fornecedor).removeProduto(produto,descricao);
 	}
 	
 	/**
@@ -168,7 +181,7 @@ public class SistemaFornecedores {
 		else if(!this.fornecedores.containsKey(fornecedor)) {
 			throw new IllegalArgumentException("Erro na exibicao de produto: fornecedor nao existe.");
 		}
-		return this.fornecedores.get(fornecedor).imprimeProduto(produto);
+		return this.fornecedores.get(fornecedor).imprimeProduto(produto, descricao);
 	}
 	
 	/**
@@ -223,7 +236,7 @@ public class SistemaFornecedores {
 		}else if(!this.fornecedores.containsKey(fornecedor)) {
 			throw new IllegalArgumentException("Erro na edicao de produto: fornecedor nao existe.");
 		}
-		return this.fornecedores.get(fornecedor).editaProduto(produto, valor);
+		return this.fornecedores.get(fornecedor).editaProduto(produto, descricao, valor);
 	}
 	
 }

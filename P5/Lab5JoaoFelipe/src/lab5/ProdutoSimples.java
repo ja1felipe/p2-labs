@@ -48,7 +48,7 @@ public class ProdutoSimples implements Produto{
 	 * @return o nome do produto.
 	 */
 	public String getNomeProduto() {
-		return this.nome;
+		return this.nome+this.descricao;
 	}
 	
 	public double getPreco() {

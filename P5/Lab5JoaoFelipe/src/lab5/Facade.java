@@ -139,6 +139,10 @@ public class Facade {
 		return sistemaFornecedores.cadastraProduto(fornecedor, produto, descricao, preco);
 	}
 	
+	public boolean adicionaCombo(String fornecedor, String nome, String descricao, double fator, String produtos) {
+		return sistemaFornecedores.cadastraCombo(fornecedor, nome, descricao, fator, produtos);
+	}
+	
 	/**
 	 * Remove um produto valido de um determinado fornecedor.
 	 * @param produto nome do produto.
@@ -191,7 +195,7 @@ public class Facade {
 	}
 	
 	public static void main(String[] args) {
-		args = new String[] { "lab5.Facade", "Testes/use_case_1.txt", "Testes/use_case_2.txt", "Testes/use_case_3.txt" };
+		args = new String[] { "lab5.Facade", "Testes/use_case_1.txt", "Testes/use_case_2.txt", "Testes/use_case_3.txt", "Testes/use_case_4.txt" };
 		EasyAccept.main(args);
 	}	
 }
