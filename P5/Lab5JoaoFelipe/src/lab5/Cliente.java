@@ -68,6 +68,9 @@ public class Cliente {
 		this.local = local;
 	}
 	
+	public String getNome() {
+		return this.nome;
+	}
 	@Override
 	public String toString() {
 		String msg = this.nome + " - " + this.local + " - " + this.email;

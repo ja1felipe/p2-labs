@@ -129,6 +129,13 @@ public class SistemaClientes {
 		}
 		return true;
 	}
+	
+	public String nomeCliente(String cpf) {
+		if (!this.clientes.containsKey(cpf)) {
+			return "";
+		}
+		return this.clientes.get(cpf).getNome();
+	}
 }
 	
 	

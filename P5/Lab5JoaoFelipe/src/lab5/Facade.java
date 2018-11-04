@@ -214,6 +214,14 @@ public class Facade {
 		return this.sistemaFornecedores.getDebito(cpf, fornecedor, this.sistemaClientes.verificaCliente(cpf));
 	}
 	
+	public String exibeContas(String cpf, String fornecedor) {
+		return this.sistemaFornecedores.exibeContas(cpf, fornecedor, this.sistemaClientes.nomeCliente(cpf), this.sistemaClientes.verificaCliente(cpf));
+	}
+	
+	public String exibeContasClientes(String cpf) {
+		return this.sistemaFornecedores.exibeContasClientes(cpf, this.sistemaClientes.nomeCliente(cpf), this.sistemaClientes.verificaCliente(cpf));
+	}
+	
 	public static void main(String[] args) {
 		args = new String[] { "lab5.Facade", "Testes/use_case_1.txt", "Testes/use_case_2.txt", "Testes/use_case_3.txt", "Testes/use_case_4.txt", "Testes/use_case_5.txt" };
 		EasyAccept.main(args);

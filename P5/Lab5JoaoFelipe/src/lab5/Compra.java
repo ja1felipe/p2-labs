@@ -1,8 +1,6 @@
 package lab5;
 
-import java.text.DecimalFormat;
-
-public class Compra {
+public class Compra implements Comparable<Compra>{
 	
 	private String data;
 	private String produto;
@@ -21,6 +19,12 @@ public class Compra {
 	}
 	
 	public String toString() {
-		return this.produto + " - " + this.data;
+		String dataf = this.data.replace("/", "-");
+		return this.produto + " - " + dataf;
+	}
+
+	@Override
+	public int compareTo(Compra o) {
+		return this.toString().compareTo(o.toString());
 	}
 }

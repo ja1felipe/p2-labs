@@ -2,17 +2,17 @@ package lab5;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 public class Conta {
 	
-	private Set<Compra> compras;
+	private List<Compra> compras;
 	private static DecimalFormat df2 = new DecimalFormat(".00");
 	
 	public Conta() {
-		this.compras = new HashSet<>();
+		this.compras = new ArrayList<>();
 	}
 	
 	public boolean cadastraCompra(String data, String produto, double preco) {
@@ -28,5 +28,13 @@ public class Conta {
 		}
 		df2.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.US));
 		return df2.format(soma);
+	}
+	
+	public String exibeContas() {
+		String msg = "";
+		for (Compra a : this.compras) {
+			msg += a.toString() + " | ";
+		}
+		return msg.substring(0, msg.length()-3);
 	}
 }

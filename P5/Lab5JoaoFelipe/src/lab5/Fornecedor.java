@@ -215,11 +215,8 @@ public class Fornecedor {
 		boolean flag = false;
 		if(data.length() != 10) {
 			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
-		}else if(data.equals("") || data == null) {
-			throw new IllegalArgumentException("222222222");
 		}
 		for (Produto a : this.produtos) {
-			System.out.println(a.getNomeProduto());
 			if(a.getNomeProduto().equals(produto+descricao)) {
 				flag = true;
 				if(this.contas.get(cpf) == null) {
@@ -244,6 +241,13 @@ public class Fornecedor {
 			throw new IllegalAccessError("Erro ao recuperar debito: cliente nao tem debito com fornecedor.");
 		}
 		return this.contas.get(cpf).getDebito();
+	}
+	
+	public String exibeContas(String cpf) {
+		if(!this.contas.containsKey(cpf)){
+			throw new IllegalAccessError("Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.");
+		}
+		return this.nome + " | " + this.contas.get(cpf).exibeContas();
 	}
 	
 	@Override

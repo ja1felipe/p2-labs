@@ -286,4 +286,36 @@ public class SistemaFornecedores {
 		return this.fornecedores.get(fornecedor).getDebito(cpf);
 	}
 	
+	public String exibeContas(String cpf, String fornecedor, String nomeCliente, boolean existe) {
+		if(cpf.length() != 11) {
+			throw new IllegalArgumentException("Erro ao exibir conta do cliente: cpf invalido.");
+		}else if(!existe) {
+			throw new IllegalArgumentException("Erro ao exibir conta do cliente: cliente nao existe.");
+		}else if(fornecedor == null || "".equals(fornecedor)) {
+			throw new IllegalArgumentException("Erro ao exibir conta do cliente: fornecedor nao pode ser vazio ou nulo.");
+		}else if(!this.fornecedores.containsKey(fornecedor)) {
+			throw new IllegalArgumentException("Erro ao exibir conta do cliente: fornecedor nao existe.");
+		}
+		return "Cliente: " + nomeCliente + " | " + this.fornecedores.get(fornecedor).exibeContas(cpf);
+	}
+
+	public String exibeContasClientes(String cpf, String nomeCliente, boolean existe) {
+		if(cpf.length() != 11) {
+			throw new IllegalArgumentException("Erro ao exibir conta do cliente: cpf invalido.");
+		}else if(!existe) {
+			throw new IllegalArgumentException("Erro ao exibir conta do cliente: cliente nao existe.");
+		}
+		return "Cliente: " + nomeCliente + " | " + this.verificaContas(cpf);
+	}
+	
+	public String verificaContas(String cpf) {
+		String msg = "";
+		for (String f : this.fornecedores.keySet()) {
+			try {
+				msg += this.fornecedores.get(f).exibeContas(cpf) + " | ";
+			}catch (IllegalAccessError e) {
+			}
+		}
+		return msg.substring(0, msg.length()-3);
+	}
 }
