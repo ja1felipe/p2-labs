@@ -1,8 +1,5 @@
 package lab5;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ProdutoCombo implements Produto {
 	private ProdutoSimples[] produtos;
 	private String nome;
@@ -28,8 +25,16 @@ public class ProdutoCombo implements Produto {
 		this.fator = fator;
 	}
 	
+	public double getPreco() {
+		return this.fazConta();
+	}
+	
 	public String getNomeProduto() {
 		return this.nome+this.descricao;
+	}
+	
+	public String getNome() {
+		return this.nome;
 	}
 	@Override
 	public String toString() {
@@ -68,6 +73,6 @@ public class ProdutoCombo implements Produto {
 			return false;
 		return true;
 	}
-	
+
 	
 }

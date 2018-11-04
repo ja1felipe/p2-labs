@@ -239,4 +239,51 @@ public class SistemaFornecedores {
 		return this.fornecedores.get(fornecedor).editaProduto(produto, descricao, valor);
 	}
 	
+	public boolean editaCombo(String fornecedor, String produto, String descricao, double valor) {
+		if(valor <= 0 || valor >= 1) {
+			throw new IllegalArgumentException("Erro na edicao de combo: fator invalido.");
+		}else if(descricao == null || "".equals(descricao)) {
+			throw new IllegalArgumentException("Erro na edicao de combo: descricao nao pode ser vazia ou nula.");
+		}else if(produto == null || "".equals(produto)) {
+			throw new IllegalArgumentException("Erro na edicao de combo: nome nao pode ser vazio ou nulo.");
+		}else if(fornecedor == null || "".equals(fornecedor)) {
+			throw new IllegalArgumentException("Erro na edicao de combo: fornecedor nao pode ser vazio ou nulo.");
+		}else if(!this.fornecedores.containsKey(fornecedor)) {
+			throw new IllegalArgumentException("Erro na edicao de combo: fornecedor nao existe.");
+		}
+		return this.fornecedores.get(fornecedor).editaCombo(produto, descricao, valor);
+	}
+	
+	public boolean adicionaCompra(String cpf, String fornecedor, String data, String produto, String descricao, boolean existe) {
+		if(descricao == null || "".equals(descricao)) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula");
+		}else if(cpf.length() != 11) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: cpf invalido.");
+		}else if(!existe) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: cliente nao existe.");
+		}else if(produto == null || "".equals(produto)) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
+		}else if(data.equals("") || data == null) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: data nao pode ser vazia ou nula.");
+		}else if(fornecedor == null || "".equals(fornecedor)) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
+		}else if(!this.fornecedores.containsKey(fornecedor)) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: fornecedor nao existe.");
+		}
+		return this.fornecedores.get(fornecedor).adicionaCompra(cpf, data, produto, descricao);
+	}
+	
+	public String getDebito(String cpf, String fornecedor, boolean existe) {
+		if(cpf.length() != 11) {
+			throw new IllegalArgumentException("Erro ao recuperar debito: cpf invalido.");
+		}else if(!existe) {
+			throw new IllegalArgumentException("Erro ao recuperar debito: cliente nao existe.");
+		}else if(fornecedor == null || "".equals(fornecedor)) {
+			throw new IllegalArgumentException("Erro ao recuperar debito: fornecedor nao pode ser vazio ou nulo.");
+		}else if(!this.fornecedores.containsKey(fornecedor)) {
+			throw new IllegalArgumentException("Erro ao recuperar debito: fornecedor nao existe.");
+		}
+		return this.fornecedores.get(fornecedor).getDebito(cpf);
+	}
+	
 }

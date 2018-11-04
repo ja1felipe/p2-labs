@@ -1,7 +1,5 @@
 package lab5;
 
-import java.text.DecimalFormat;
-
 /**
  * Representacao de um produto.
  * @author Joao Felipe da Silva Freitas.
@@ -54,6 +52,11 @@ public class ProdutoSimples implements Produto{
 	public double getPreco() {
 		return this.preco;
 	}
+	
+	public String getNome() {
+		return this.nome;
+	}
+	
 	@Override
 	public String toString() {
 		String resultado = String.format("%.2f", this.preco);
@@ -91,4 +94,6 @@ public class ProdutoSimples implements Produto{
 			return false;
 		return true;
 	}
+	
+
 }

@@ -3,7 +3,11 @@ package lab5;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
+
 
 /**
  * Representacao do fornecedor.
@@ -16,6 +20,7 @@ public class Fornecedor {
 	private String email;
 	private String telefone;
 	private Set<Produto> produtos;
+	private Map<String, Conta> contas;
 	
 	/**
 	 * Construtoi um novo fornecedor apatir do seu nome, email e telefone.
@@ -34,6 +39,7 @@ public class Fornecedor {
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
+		this.contas = new TreeMap<>();
 		this.produtos = new HashSet<>();
 	}
 	
@@ -77,7 +83,7 @@ public class Fornecedor {
 			throw new IllegalArgumentException("Erro no cadastro de combo: nome nao pode ser vazio ou nulo.");
 		}else if(descricao == null || "".equals(descricao)) {
 			throw new IllegalArgumentException("Erro no cadastro de combo: descricao nao pode ser vazia ou nula.");
-		}else if(fator < 0 || fator > 1) {
+		}else if(fator <= 0 || fator >= 1) {
 			throw new IllegalArgumentException("Erro no cadastro de combo: fator invalido.");
 		}
 		for (Produto produtosIguais : this.produtos) {
@@ -105,7 +111,7 @@ public class Fornecedor {
 						break;
 					}
 					catch (ClassCastException e) {
-						throw new ClassCastException("Não é possivel criar um combo com um produto que já é um combo");
+						throw new ClassCastException("Erro no cadastro de combo: um combo não pode possuir combos na lista de produtos.");
 					}	
 				}
 			}
@@ -167,20 +173,17 @@ public class Fornecedor {
 			msg = "";
 			return msg;
 		}
-		ArrayList<String> auxiliar = new ArrayList<>();
-		for(Produto produto : this.produtos) {
-			msg = this.nome + " - " + produto.toString() + " | ";
-			auxiliar.add(msg);
+		List<Produto> auxiliar = new ArrayList<>();
+		for(Produto p : this.produtos) {
+			auxiliar.add(p);
 		}
 		Collections.sort(auxiliar);
-		msg = "";
-		for (int i = 0; i < auxiliar.size(); i++) {
-			msg += auxiliar.get(i) ;
+		for (Produto p : auxiliar) {
+			msg +=this.nome + " - " + p.toString() + " | ";
 		}
-		
 		msg = msg.substring(0, msg.length()-3);
 		return msg;
-	}
+}
 	
 	/**
 	 * Edita o preco de um produto apartir do seu nome e do seu novo preco.
@@ -194,7 +197,53 @@ public class Fornecedor {
 				produto.setPreco(valor);
 				return true;
 			}
-		}return false;
+		}
+		throw new IllegalAccessError("Erro na edicao de produto: produto nao existe.");
+	}
+	
+	public boolean editaCombo(String nome, String descricao, double valor) {
+		for(Produto produto : this.produtos) {
+			if(produto.getNomeProduto().equals(nome+descricao)) {
+				produto.setPreco(valor);
+				return true;
+			}
+		}
+		throw new IllegalAccessError("Erro na edicao de combo: produto nao existe.");
+	}
+	
+	public boolean adicionaCompra(String cpf, String data, String produto, String descricao) {
+		boolean flag = false;
+		if(data.length() != 10) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
+		}else if(data.equals("") || data == null) {
+			throw new IllegalArgumentException("222222222");
+		}
+		for (Produto a : this.produtos) {
+			System.out.println(a.getNomeProduto());
+			if(a.getNomeProduto().equals(produto+descricao)) {
+				flag = true;
+				if(this.contas.get(cpf) == null) {
+					Conta c = new Conta();
+					this.contas.put(cpf, c);
+					this.contas.get(cpf).cadastraCompra(data, produto, a.getPreco());
+					break;
+				}else {
+					this.contas.get(cpf).cadastraCompra(data, produto, a.getPreco());
+					break;
+				}
+			}
+		}
+		if(!flag) {
+			throw new IllegalAccessError("Erro ao cadastrar compra: produto nao existe.");
+		}
+		return true;
+	}
+	
+	public String getDebito(String cpf) {
+		if(!this.contas.containsKey(cpf)){
+			throw new IllegalAccessError("Erro ao recuperar debito: cliente nao tem debito com fornecedor.");
+		}
+		return this.contas.get(cpf).getDebito();
 	}
 	
 	@Override

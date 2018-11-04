@@ -13,6 +13,7 @@ import java.util.Map;
 public class SistemaClientes {
 	
 	private Map<String, Cliente> clientes;
+
 	
 	/**
 	 * Construtor que inicializa um HashMap de clientes.
@@ -120,6 +121,13 @@ public class SistemaClientes {
 		default:
 			throw new IllegalArgumentException("Erro na edicao do cliente: atributo nao existe.");
 		}
+	}
+	
+	public boolean verificaCliente(String cpf) {
+		if (!this.clientes.containsKey(cpf)) {
+			return false;
+		}
+		return true;
 	}
 }
 	

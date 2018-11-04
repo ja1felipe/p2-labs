@@ -30,7 +30,7 @@ public class Facade {
 	 * @return retorna o cpf do cliente.
 	 */
 	public String adicionaCliente(String cpf, String nome, String email, String local) {
-		sistemaClientes.cadastrarCliente(cpf, nome, email, local);
+		this.sistemaClientes.cadastrarCliente(cpf, nome, email, local);
 		return cpf;
 	}
 	
@@ -41,7 +41,7 @@ public class Facade {
 	 * @return uma string que representa o cliente no formato NOME - LOCALIZACAO - EMAIL.
 	 */
 	public String exibeCliente(String cpf) {
-		return sistemaClientes.imprimeCliente(cpf);
+		return this.sistemaClientes.imprimeCliente(cpf);
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class Facade {
 	 * @return uma string que representa todos os clientes no formato NOME - LOCALIZACAO - EMAIL | NOME - LOCALIZACAO - EMAIL.
 	 */
 	public String exibeClientes() {
-		return sistemaClientes.imprimeTodosClientes();
+		return this.sistemaClientes.imprimeTodosClientes();
 	}
 	
 	/**
@@ -60,7 +60,7 @@ public class Facade {
 	 * @return retorna um booleano True se a remocao do cliente for um sucesso.
 	 */
 	public boolean removeCliente(String cpf) {
-		return sistemaClientes.removerCliente(cpf);
+		return this.sistemaClientes.removerCliente(cpf);
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class Facade {
 	 * @return retorna um booleando True se a edicao do cliente for um sucesso.
 	 */
 	public boolean editaCliente(String cpf, String atributo, String novo) {
-		return sistemaClientes.editarCliente(cpf, atributo, novo);
+		return this.sistemaClientes.editarCliente(cpf, atributo, novo);
 	}
 	
 	/**
@@ -84,7 +84,7 @@ public class Facade {
 	 * @return o nome do fornecedor.
 	 */
 	public String adicionaFornecedor(String nome, String email, String telefone) {
-		sistemaFornecedores.cadastrarFornecedor(nome, email, telefone);
+		this.sistemaFornecedores.cadastrarFornecedor(nome, email, telefone);
 		return nome;
 	}
 	
@@ -94,7 +94,7 @@ public class Facade {
 	 * @return uma string que representa o fornecedor no formato NOME - EMAIL - TELEFONE.
 	 */
 	public String exibeFornecedor(String nome) {
-		return sistemaFornecedores.imprimeFornecedor(nome);
+		return this.sistemaFornecedores.imprimeFornecedor(nome);
 	}
 	
 	/**
@@ -102,7 +102,7 @@ public class Facade {
 	 * @return uma string que representa todos os fornecedores no formato NOME - EMAIL - TELEFONE | NOME - EMAIL - TELEFONE ....
 	 */
 	public String exibeFornecedores() {
-		return sistemaFornecedores.imprimeFornecedores();
+		return this.sistemaFornecedores.imprimeFornecedores();
 	}
 	
 	/**
@@ -111,7 +111,7 @@ public class Facade {
 	 * @return retorna um booleano True se a remocao do fornecedor for um sucesso.
 	 */
 	public boolean removeFornecedor(String nome) {
-		return sistemaFornecedores.removerFornecedor(nome);
+		return this.sistemaFornecedores.removerFornecedor(nome);
 	}
 	
 	/**
@@ -123,7 +123,7 @@ public class Facade {
 	 * @return retorna a booleano True se a edicao for um sucesso.
 	 */
 	public boolean editaFornecedor(String nome, String atributo, String novoAtributo) {
-		return sistemaFornecedores.editaFornecedor(nome, atributo, novoAtributo);
+		return this.sistemaFornecedores.editaFornecedor(nome, atributo, novoAtributo);
 	}
 	
 	/**
@@ -136,11 +136,11 @@ public class Facade {
 	 * @return um booleando True se o produto for adicionado com sucesso.
 	 */
 	public boolean adicionaProduto(String fornecedor, String produto, String descricao, double preco) {
-		return sistemaFornecedores.cadastraProduto(fornecedor, produto, descricao, preco);
+		return this.sistemaFornecedores.cadastraProduto(fornecedor, produto, descricao, preco);
 	}
 	
 	public boolean adicionaCombo(String fornecedor, String nome, String descricao, double fator, String produtos) {
-		return sistemaFornecedores.cadastraCombo(fornecedor, nome, descricao, fator, produtos);
+		return this.sistemaFornecedores.cadastraCombo(fornecedor, nome, descricao, fator, produtos);
 	}
 	
 	/**
@@ -151,7 +151,7 @@ public class Facade {
 	 * @return retorna um booleano True se o produto for removido com sucesso.
 	 */
 	public boolean removeProduto(String produto, String descricao, String fornecedor) {
-		return sistemaFornecedores.removerProduto(fornecedor, produto, descricao);
+		return this.sistemaFornecedores.removerProduto(fornecedor, produto, descricao);
 	}
 	
 	/**
@@ -162,7 +162,7 @@ public class Facade {
 	 * @return uma String no formato PRODUTO - DESCRICAO - PRECO.
 	 */
 	public String exibeProduto(String produto, String descricao, String fornecedor) {
-		return sistemaFornecedores.imprimeProduto(produto, descricao, fornecedor);
+		return this.sistemaFornecedores.imprimeProduto(produto, descricao, fornecedor);
 	}
 	
 	/**
@@ -171,7 +171,7 @@ public class Facade {
 	 * @return uma String com todos produtos do fornecedor em ordem alfabetica, no formado FORNECEDOR - PRODUTO - DESCRICAO - PRECO.
 	 */
 	public String exibeProdutosFornecedor(String fornecedor) {
-		return sistemaFornecedores.listaProdutosDeFornecedor(fornecedor);
+		return this.sistemaFornecedores.listaProdutosDeFornecedor(fornecedor);
 	}
 	
 	/**
@@ -179,7 +179,7 @@ public class Facade {
 	 * @return uma String com todos produtos em ordem alfabetica, no formado FORNECEDOR - PRODUTO - DESCRICAO - PRECO.
 	 */
 	public String exibeProdutos() {
-		return sistemaFornecedores.listaTodosProdutos();
+		return this.sistemaFornecedores.listaTodosProdutos();
 	}
 	
 	/**
@@ -191,11 +191,31 @@ public class Facade {
 	 * @return um booleano True se o produto for editado com sucesso.
 	 */
 	public boolean editaProduto(String produto, String descricao, String fornecedor, double novoPreco) {
-		return sistemaFornecedores.editaProduto(fornecedor, produto, descricao, novoPreco);
+		return this.sistemaFornecedores.editaProduto(fornecedor, produto, descricao, novoPreco);
+	}
+	
+	/**
+	 * Edita o preco de um combo apartir do seu nome, descricao, nome do fornecedor e seu novo preco.
+	 * @param produto nome do combo.
+	 * @param descricao descricao do combo.
+	 * @param fornecedor nome do fornecedor do combo.
+	 * @param novoPreco novo preco do combo.
+	 * @return um booleano True se o combo for editado com sucesso.
+	 */
+	public boolean editaCombo(String produto, String descricao, String fornecedor, double novoFator) {
+		return this.sistemaFornecedores.editaCombo(fornecedor, produto, descricao, novoFator);
+	}
+	
+	public boolean adicionaCompra(String cpf, String fornecedor, String data, String produto, String descricao) {
+		return this.sistemaFornecedores.adicionaCompra(cpf, fornecedor, data, produto, descricao, this.sistemaClientes.verificaCliente(cpf));
+	}
+	
+	public String getDebito(String cpf, String fornecedor) {
+		return this.sistemaFornecedores.getDebito(cpf, fornecedor, this.sistemaClientes.verificaCliente(cpf));
 	}
 	
 	public static void main(String[] args) {
-		args = new String[] { "lab5.Facade", "Testes/use_case_1.txt", "Testes/use_case_2.txt", "Testes/use_case_3.txt", "Testes/use_case_4.txt" };
+		args = new String[] { "lab5.Facade", "Testes/use_case_1.txt", "Testes/use_case_2.txt", "Testes/use_case_3.txt", "Testes/use_case_4.txt", "Testes/use_case_5.txt" };
 		EasyAccept.main(args);
 	}	
 }
