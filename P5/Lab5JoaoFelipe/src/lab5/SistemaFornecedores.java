@@ -239,6 +239,14 @@ public class SistemaFornecedores {
 		return this.fornecedores.get(fornecedor).editaProduto(produto, descricao, valor);
 	}
 	
+	/**
+	 * Edita o fator de descondo de um combo apartir do seu nome, descricao, fornecedor e seu novo fator de desconto.
+	 * @param fornecedor nome do fornecedor.
+	 * @param produto nome do produto.
+	 * @param descricao descricao do produto.
+	 * @param valor novo fator de desconto.
+	 * @return retorna um booleando True se o combo for edita com sucesso.
+	 */
 	public boolean editaCombo(String fornecedor, String produto, String descricao, double valor) {
 		if(valor <= 0 || valor >= 1) {
 			throw new IllegalArgumentException("Erro na edicao de combo: fator invalido.");
@@ -254,6 +262,16 @@ public class SistemaFornecedores {
 		return this.fornecedores.get(fornecedor).editaCombo(produto, descricao, valor);
 	}
 	
+	/**
+	 * Adiciona uma nova compra apatir do cpf do cliente, nome do fornecedor, data da compra, nome do produto, descricao do produto e um booleano informando se o cliente existe ou nao.
+	 * @param cpf cpf do cliente.
+	 * @param fornecedor nome do fornecedor.
+	 * @param data data da compra.
+	 * @param produto nome do produto.
+	 * @param descricao descricao do produto.
+	 * @param existe booleano informando se o cliente existe ou nao.
+	 * @return retorna um booleando True se a compra foi adiciona com sucesso.
+	 */
 	public boolean adicionaCompra(String cpf, String fornecedor, String data, String produto, String descricao, boolean existe) {
 		if(descricao == null || "".equals(descricao)) {
 			throw new IllegalArgumentException("Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula");
@@ -273,6 +291,13 @@ public class SistemaFornecedores {
 		return this.fornecedores.get(fornecedor).adicionaCompra(cpf, data, produto, descricao);
 	}
 	
+	/**
+	 * Mostra debito do cliente apartir do seu cpf, nome do fornecedor e um booleando que indica se o cliente existe ou nao.
+	 * @param cpf cpf do cliente.
+	 * @param fornecedor nome do fornecedor.
+	 * @param existe booleando informando se o cliente existe ou nao.
+	 * @return retorna uma String representando o debito do cliente.
+	 */
 	public String getDebito(String cpf, String fornecedor, boolean existe) {
 		if(cpf.length() != 11) {
 			throw new IllegalArgumentException("Erro ao recuperar debito: cpf invalido.");
@@ -286,6 +311,14 @@ public class SistemaFornecedores {
 		return this.fornecedores.get(fornecedor).getDebito(cpf);
 	}
 	
+	/**
+	 * Exibe as compras de um cliente em determinado fornecedor.
+	 * @param cpf cpf do cliente.
+	 * @param fornecedor nome do fornecedor.
+	 * @param nomeCliente nome do cliente.
+	 * @param existe existe booleando informando se o cliente existe ou nao.
+	 * @return retorna uma String representando todas compras do cliente no determinado fornecedor.
+	 */
 	public String exibeContas(String cpf, String fornecedor, String nomeCliente, boolean existe) {
 		if(cpf.length() != 11) {
 			throw new IllegalArgumentException("Erro ao exibir conta do cliente: cpf invalido.");
@@ -299,22 +332,39 @@ public class SistemaFornecedores {
 		return "Cliente: " + nomeCliente + " | " + this.fornecedores.get(fornecedor).exibeContas(cpf);
 	}
 
+	/**
+	 * Exibe todas contas do cliente.
+	 * @param cpf cpf do cliente.
+	 * @param nomeCliente nome do cliente.
+	 * @param existe existe booleando informando se o cliente existe ou nao.
+	 * @return retorna uma string com todas compras do cliente.
+	 */
 	public String exibeContasClientes(String cpf, String nomeCliente, boolean existe) {
 		if(cpf.length() != 11) {
-			throw new IllegalArgumentException("Erro ao exibir conta do cliente: cpf invalido.");
+			throw new IllegalArgumentException("Erro ao exibir contas do cliente: cpf invalido.");
 		}else if(!existe) {
-			throw new IllegalArgumentException("Erro ao exibir conta do cliente: cliente nao existe.");
+			throw new IllegalArgumentException("Erro ao exibir contas do cliente: cliente nao existe.");
 		}
 		return "Cliente: " + nomeCliente + " | " + this.verificaContas(cpf);
 	}
 	
+	/**
+	 * Verifica se o cliente tem ou nao conta nos fornecedores.
+	 * @param cpf cpf do cliente.
+	 * @return retorna uma String com a representacao das compras do cliente, se houver compra.
+	 */
 	public String verificaContas(String cpf) {
 		String msg = "";
+		boolean flag = false;
 		for (String f : this.fornecedores.keySet()) {
 			try {
 				msg += this.fornecedores.get(f).exibeContas(cpf) + " | ";
+				flag = true;
 			}catch (IllegalAccessError e) {
 			}
+		}
+		if (!flag) {
+			throw new IllegalAccessError("Erro ao exibir contas do cliente: cliente nao tem nenhuma conta.");
 		}
 		return msg.substring(0, msg.length()-3);
 	}

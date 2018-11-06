@@ -42,21 +42,33 @@ public class ProdutoSimples implements Produto{
 	}
 	
 	/**
-	 * Pega o nome do produto.
-	 * @return o nome do produto.
+	 * Retorna um Stirng no formato NOME+DESCRICAO
+	 * @return retorna uma String.
 	 */
 	public String getNomeProduto() {
 		return this.nome+this.descricao;
 	}
 	
+	/**
+	 * Pega o preco atual do produto.
+	 * @return retorna um preco do produto.
+	 */
 	public double getPreco() {
 		return this.preco;
 	}
 	
+	/**
+	 * Retorna o nome do produto.
+	 * @return retorna o nome do produto.
+	 */
 	public String getNome() {
 		return this.nome;
 	}
 	
+	/**
+	 * Retorna uma representasao em String do produto.
+	 * @return retorna uma String no formato NOME - DESCRICAO - R$PRECO
+	 * */
 	@Override
 	public String toString() {
 		String resultado = String.format("%.2f", this.preco);

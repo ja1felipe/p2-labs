@@ -151,8 +151,11 @@ class TesteFornecedor {
 	@Test
 	void editaProdutoInvalido() {
 		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
-		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
-		assertEquals(false, c.editaProduto("Cuscuz", "Cuscuz", 4.00));
+		try {
+			c.editaProduto("Cuscuz", "Cuscuz", 4.00);
+		} catch (IllegalAccessError e) {
+			assertEquals("Erro na edicao de produto: produto nao existe.", e.getMessage());
+		}
 	}
 	
 	@Test
@@ -193,5 +196,90 @@ class TesteFornecedor {
 		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
 		Object d = new Object();
 		assertEquals(false, c.equals(d));
+	}
+	
+	@Test
+	void testCadastraComboTrue() {
+		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
+		c.cadastraProduto(p);
+		p = new ProdutoSimples("Carne","Carne",5.00);
+		c.cadastraProduto(p);
+		String[] array = {"Arroz - Arroz", "Carne - Carne"};
+		assertEquals(true, c.cadastraCombo("Arroz - Carne", "arroz e carne", 0.2, array));
+	}
+	
+	@Test
+	void testCadastraComboInvalido() {
+		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
+		c.cadastraProduto(p);
+		p = new ProdutoSimples("Carne","Carne",5.00);
+		c.cadastraProduto(p);
+		String[] array = {"Arroz - Arroz", "Carne - Carne"};
+		c.cadastraCombo("Arroz - Carne", "arroz e carne", 0.2, array);
+		try {
+			c.cadastraCombo("Arroz - Carne", "arroz e carne", 0.2, array);
+		}catch (IllegalArgumentException e) {
+		assertEquals("Erro no cadastro de combo: combo ja existe.", e.getMessage());
+		}
+	}
+	
+
+	@Test
+	void testEditaComboTrue() {
+		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
+		c.cadastraProduto(p);
+		p = new ProdutoSimples("Carne","Carne",5.00);
+		c.cadastraProduto(p);
+		String[] array = {"Arroz - Arroz", "Carne - Carne"};
+		c.cadastraCombo("Arroz - Carne", "arroz e carne", 0.2, array);
+		assertEquals(true, c.editaCombo("Arroz - Carne", "arroz e carne", 0.1));
+	}
+	
+	@Test
+	void testEditaComboInvalido() {
+		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
+		c.cadastraProduto(p);
+		p = new ProdutoSimples("Carne","Carne",5.00);
+		c.cadastraProduto(p);
+		String[] array = {"Arroz - Arroz", "Carne - Carne"};
+		try {
+			c.editaCombo("Araa", "sad",0.1);
+		}catch (IllegalAccessError e) {
+			assertEquals("Erro na edicao de combo: produto nao existe.", e.getMessage());
+		}
+	}
+	
+	@Test
+	void testAdicionaCompraTrue() {
+		Cliente a = new Cliente("07348489354", "P", "aa@a.com", "SPLAB");
+		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
+		c.cadastraProduto(p);
+		p = new ProdutoSimples("Carne","Carne",5.00);
+		c.cadastraProduto(p);
+		String[] array = {"Arroz - Arroz", "Carne - Carne"};
+		c.cadastraCombo("Arroz - Carne", "arroz e carne", 0.2, array);
+		assertEquals(true, c.adicionaCompra("07348489354", "01/12/2010", "Carne", "Carne"));
+	}
+	
+	@Test
+	void testAdicionaCompraFalse() {
+		Cliente a = new Cliente("07348489354", "P", "aa@a.com", "SPLAB");
+		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
+		c.cadastraProduto(p);
+		p = new ProdutoSimples("Carne","Carne",5.00);
+		c.cadastraProduto(p);
+		String[] array = {"Arroz - Arroz", "Carne - Carne"};
+		c.cadastraCombo("Arroz - Carne", "arroz e carne", 0.2, array);
+		try {
+			c.adicionaCompra("07348489354", "01/12/2010", "Carn", "Carne");
+		} catch (IllegalAccessError e) {
+			assertEquals("Erro ao cadastrar compra: produto nao existe.", e.getMessage());
+		}
 	}
 }

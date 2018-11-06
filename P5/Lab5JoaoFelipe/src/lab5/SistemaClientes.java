@@ -123,6 +123,11 @@ public class SistemaClientes {
 		}
 	}
 	
+	/**
+	 * Verifica se o cliente existe apartir do seu cpf.
+	 * @param cpf cpf do cliente.
+	 * @return retorna um booleano True caso o cliente exista ou um booleano False caso nao exista.
+	 */
 	public boolean verificaCliente(String cpf) {
 		if (!this.clientes.containsKey(cpf)) {
 			return false;
@@ -130,6 +135,11 @@ public class SistemaClientes {
 		return true;
 	}
 	
+	/**
+	 * Pega o nome do cliente apartir do seu cpf.
+	 * @param cpf cpf do cliente.
+	 * @return retorna o nome do Cliente.
+	 */
 	public String nomeCliente(String cpf) {
 		if (!this.clientes.containsKey(cpf)) {
 			return "";

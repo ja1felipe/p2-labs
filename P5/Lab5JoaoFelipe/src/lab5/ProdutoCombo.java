@@ -1,11 +1,23 @@
 package lab5;
 
+/**
+ * Representa um combo de produtos.
+ * @author joao Felipe da Silva Freitas
+ *
+ */
 public class ProdutoCombo implements Produto {
 	private ProdutoSimples[] produtos;
 	private String nome;
 	private String descricao;
 	private double fator;
 	
+	/**
+	 * Constroi um novo combo apartir do seu nome, descricao, fato de desconto e um array de Produtos Simples.
+	 * @param nome nome do novo combo.
+	 * @param descricao descricao do novo combo.
+	 * @param fator fator de desconto.
+	 * @param produtos array de Produtos simples.
+	 */
 	public ProdutoCombo(String nome, String descricao, double fator, ProdutoSimples[] produtos) {
 		this.produtos = produtos;
 		this.nome = nome;
@@ -13,6 +25,10 @@ public class ProdutoCombo implements Produto {
 		this.fator = fator;
 	}
 	
+	/**
+	 * Percorre o array de Produtos Simples e vai somando seu preco e depois multiplica por (1-fator de desconto).
+	 * @return
+	 */
 	private double fazConta() {
 		double soma = 0;
 		for (int i = 0; i < produtos.length; i++) {
@@ -21,21 +37,43 @@ public class ProdutoCombo implements Produto {
 		soma = soma * (1-fator);
 		return soma;
 	}
+	
+	/**
+	 * Seta um novo fator de desconto para o combo.
+	 * @param fator novo fator de desconto.
+	 */
 	public void setPreco(double fator) {
 		this.fator = fator;
 	}
 	
+	/**
+	 * Pega o preco atual do combo.
+	 * @return retorna um preco do combo.
+	 */
 	public double getPreco() {
 		return this.fazConta();
 	}
 	
+	/**
+	 * Retorna um Stirng no formato NOME+DESCRICAO
+	 * @return retorna uma String.
+	 */
 	public String getNomeProduto() {
 		return this.nome+this.descricao;
 	}
 	
+	/**
+	 * Retorna o nome do combo.
+	 * @return retorna o nome do combo.
+	 */
 	public String getNome() {
 		return this.nome;
 	}
+	
+	/**
+	 * Retorna uma representasao em String do combo.
+	 * @return retorna uma String no formato NOME - DESCRICAO - R$PRECO
+	 * */
 	@Override
 	public String toString() {
 		String resultado = String.format("%.2f", this.fazConta());

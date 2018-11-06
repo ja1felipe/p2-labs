@@ -78,6 +78,14 @@ public class Fornecedor {
 		return true;
 	}
 	
+	/**
+	 * Cadastra um novo combo no fornecedor.
+	 * @param produto nome do combo.
+	 * @param descricao descricao do combo.
+	 * @param fator fator de desconto.
+	 * @param produtosPassados Array de String com nome e descricao dos protudos simples que farao parte do combo.
+	 * @return retorna um booleano caso o cadastra do combo for um sucesso.
+	 */
 	public boolean cadastraCombo(String produto, String descricao, double fator, String[] produtosPassados) {
 		if(produto == null || "".equals(produto)) {
 			throw new IllegalArgumentException("Erro no cadastro de combo: nome nao pode ser vazio ou nulo.");
@@ -96,6 +104,11 @@ public class Fornecedor {
 		return true;
 	}
 	
+	/**
+	 * Procura os produtos simples passados a partir do seu nome e os tranfere para um Array de ProdutosSimples.
+	 * @param produtosPassados Array de String com nome e descricao dos produtos.
+	 * @return um array de ProtudoSimples.
+	 */
 	private ProdutoSimples[] arrumaOsProdutosDoCombo(String[] produtosPassados) {
 		boolean flag = false;
 		ProdutoSimples[] parametros = new ProdutoSimples[produtosPassados.length];
@@ -111,7 +124,7 @@ public class Fornecedor {
 						break;
 					}
 					catch (ClassCastException e) {
-						throw new ClassCastException("Erro no cadastro de combo: um combo não pode possuir combos na lista de produtos.");
+						throw new ClassCastException("Erro no cadastro de combo: um combo nï¿½o pode possuir combos na lista de produtos.");
 					}	
 				}
 			}
@@ -201,6 +214,13 @@ public class Fornecedor {
 		throw new IllegalAccessError("Erro na edicao de produto: produto nao existe.");
 	}
 	
+	/**
+	 * Edita um combo apartir do seu nome, descricao e novo fator de desconto.
+	 * @param nome nome do combo.
+	 * @param descricao descricao do combo.
+	 * @param valor novo fator de desconto.
+	 * @return retorna um booleano caso a edicao do combo seja um sucesso.
+	 */
 	public boolean editaCombo(String nome, String descricao, double valor) {
 		for(Produto produto : this.produtos) {
 			if(produto.getNomeProduto().equals(nome+descricao)) {
@@ -211,6 +231,14 @@ public class Fornecedor {
 		throw new IllegalAccessError("Erro na edicao de combo: produto nao existe.");
 	}
 	
+	/**
+	 * Adiciona uma nova compra apatir do cpf do cliente, data da compra, nome do produto e descricao do produto.
+	 * @param cpf cpf do cliente.
+	 * @param data data da compra.
+	 * @param produto nome do produto.
+	 * @param descricao descricao do produto,
+	 * @return retorna um booleano caso a adicao da compra seja um sucesso.
+	 */
 	public boolean adicionaCompra(String cpf, String data, String produto, String descricao) {
 		boolean flag = false;
 		if(data.length() != 10) {
@@ -236,6 +264,11 @@ public class Fornecedor {
 		return true;
 	}
 	
+	/**
+	 * Retorna o debito de um determinado cliente.
+	 * @param cpf cpf do cliente.
+	 * @return retorna um debito do cliente.
+	 */
 	public String getDebito(String cpf) {
 		if(!this.contas.containsKey(cpf)){
 			throw new IllegalAccessError("Erro ao recuperar debito: cliente nao tem debito com fornecedor.");
@@ -243,6 +276,11 @@ public class Fornecedor {
 		return this.contas.get(cpf).getDebito();
 	}
 	
+	/**
+	 * Exibe a conta de um determinado cliente.
+	 * @param cpf cpf do cliente.
+	 * @return retorna um String no formado NOME-DO-FORNECEDOR | Compras do Cliente.... 
+	 */
 	public String exibeContas(String cpf) {
 		if(!this.contas.containsKey(cpf)){
 			throw new IllegalAccessError("Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.");
@@ -250,6 +288,10 @@ public class Fornecedor {
 		return this.nome + " | " + this.contas.get(cpf).exibeContas();
 	}
 	
+	/**
+	 * Representacao do fornecedor em forma de String.
+	 * @return retorna uma representacao do fornecedor no formato NOME - EMAIL - TELEFONE
+	 */
 	@Override
 	public String toString() {
 		String msg = this.nome + " - " + this.email + " - " + this.telefone;

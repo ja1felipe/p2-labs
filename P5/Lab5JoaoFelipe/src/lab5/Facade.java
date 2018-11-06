@@ -206,24 +206,50 @@ public class Facade {
 		return this.sistemaFornecedores.editaCombo(fornecedor, produto, descricao, novoFator);
 	}
 	
+	/**
+	 * Adiciona uma nova compra do cliente na conta de um fornecedor.
+	 * @param cpf cpf do cliente.
+	 * @param fornecedor nome do fornecedor.
+	 * @param data data da compra.
+	 * @param produto nome do produto.
+	 * @param descricao descricao do produto.
+	 * @return um booleano True se a adicao da compra for um sucesso.
+	 */
 	public boolean adicionaCompra(String cpf, String fornecedor, String data, String produto, String descricao) {
 		return this.sistemaFornecedores.adicionaCompra(cpf, fornecedor, data, produto, descricao, this.sistemaClientes.verificaCliente(cpf));
 	}
 	
+	/**
+	 * Confere quanto e o debito do cliente com determinado fornecedor.
+	 * @param cpf cpf do cliente.
+	 * @param fornecedor nome do fornecedor.
+	 * @return retorna o debito do cliente com tal fornecedor.
+	 */
 	public String getDebito(String cpf, String fornecedor) {
 		return this.sistemaFornecedores.getDebito(cpf, fornecedor, this.sistemaClientes.verificaCliente(cpf));
 	}
 	
+	/**
+	 * Exibe a conta de um cliente com determinado fornecedor.
+	 * @param cpf cpf do fornecedor.
+	 * @param fornecedor nome do fornecedor.
+	 * @return retorna uma String com todas compras de um cliente com determinado fornecedor.
+	 */
 	public String exibeContas(String cpf, String fornecedor) {
 		return this.sistemaFornecedores.exibeContas(cpf, fornecedor, this.sistemaClientes.nomeCliente(cpf), this.sistemaClientes.verificaCliente(cpf));
 	}
 	
+	/**
+	 * Exibe todas compras de um cliente.
+	 * @param cpf cpf do cliente.
+	 * @return retorna uma String com todas as compras de um cliente em todas fornecedores.
+	 */
 	public String exibeContasClientes(String cpf) {
 		return this.sistemaFornecedores.exibeContasClientes(cpf, this.sistemaClientes.nomeCliente(cpf), this.sistemaClientes.verificaCliente(cpf));
 	}
 	
 	public static void main(String[] args) {
-		args = new String[] { "lab5.Facade", "Testes/use_case_1.txt", "Testes/use_case_2.txt", "Testes/use_case_3.txt", "Testes/use_case_4.txt", "Testes/use_case_5.txt" };
+		args = new String[] { "lab5.Facade", "Testes/use_case_1.txt", "Testes/use_case_2.txt", "Testes/use_case_3.txt", "Testes/use_case_4.txt", "Testes/use_case_6.txt" };
 		EasyAccept.main(args);
 	}	
 }
