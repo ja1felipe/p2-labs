@@ -124,7 +124,7 @@ public class Fornecedor {
 						break;
 					}
 					catch (ClassCastException e) {
-						throw new ClassCastException("Erro no cadastro de combo: um combo n�o pode possuir combos na lista de produtos.");
+						throw new ClassCastException("Erro no cadastro de combo: um combo nao pode possuir combos na lista de produtos.");
 					}	
 				}
 			}

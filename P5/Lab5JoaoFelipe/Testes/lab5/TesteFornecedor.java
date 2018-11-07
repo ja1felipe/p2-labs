@@ -282,4 +282,65 @@ class TesteFornecedor {
 			assertEquals("Erro ao cadastrar compra: produto nao existe.", e.getMessage());
 		}
 	}
+	
+	@Test
+	void testGetDebitoTrue() {
+		Cliente a = new Cliente("07348489354", "P", "aa@a.com", "SPLAB");
+		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
+		c.cadastraProduto(p);
+		p = new ProdutoSimples("Carne","Carne",5.00);
+		c.cadastraProduto(p);
+		String[] array = {"Arroz - Arroz", "Carne - Carne"};
+		c.cadastraCombo("Arroz - Carne", "arroz e carne", 0.2, array);
+		c.adicionaCompra("07348489354", "01/12/2010", "Carne", "Carne");
+		assertEquals("5.00", c.getDebito("07348489354"));
+	}
+	
+	@Test
+	void testGetDebitoInvalido() {
+		Cliente a = new Cliente("07348489354", "P", "aa@a.com", "SPLAB");
+		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
+		c.cadastraProduto(p);
+		p = new ProdutoSimples("Carne","Carne",5.00);
+		c.cadastraProduto(p);
+		String[] array = {"Arroz - Arroz", "Carne - Carne"};
+		c.cadastraCombo("Arroz - Carne", "arroz e carne", 0.2, array);
+		try {
+			c.getDebito("07348489354");
+		}catch (IllegalAccessError e) {
+			assertEquals("Erro ao recuperar debito: cliente nao tem debito com fornecedor.", e.getMessage());
+		}
+	}
+	
+	@Test
+	void testExibeContasTrue() {
+		Cliente a = new Cliente("07348489354", "P", "aa@a.com", "SPLAB");
+		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
+		c.cadastraProduto(p);
+		p = new ProdutoSimples("Carne","Carne",5.00);
+		c.cadastraProduto(p);
+		String[] array = {"Arroz - Arroz", "Carne - Carne"};
+		c.cadastraCombo("Arroz - Carne", "arroz e carne", 0.2, array);
+		c.adicionaCompra("07348489354", "01/12/2010", "Carne", "Carne");
+		String msg = "Felipe | Carne - 01-12-2010";
+		assertEquals(msg, c.exibeContas("07348489354"));
+	}
+	
+	@Test
+	void testExibeContasInvalido() {
+		Cliente a = new Cliente("07348489354", "P", "aa@a.com", "SPLAB");
+		Fornecedor c = new Fornecedor("Felipe","aa@a.com","4545");
+		Produto p = new ProdutoSimples("Arroz","Arroz",5.00);
+		c.cadastraProduto(p);
+		p = new ProdutoSimples("Carne","Carne",5.00);
+		c.cadastraProduto(p);
+		String[] array = {"Arroz - Arroz", "Carne - Carne"};
+		c.cadastraCombo("Arroz - Carne", "arroz e carne", 0.2, array);
+		c.adicionaCompra("07348489354", "01/12/2010", "Carne", "Carne");
+		String msg = "Felipe | Carne - 01-12-2010";
+		assertEquals(msg, c.exibeContas("07348489354"));
+	}
 }
