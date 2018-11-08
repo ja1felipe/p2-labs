@@ -368,4 +368,24 @@ public class SistemaFornecedores {
 		}
 		return msg.substring(0, msg.length()-3);
 	}
+
+	public boolean pagaDebito(String cpf, String fornecedor, boolean existe) {
+		if (cpf.equals("") || cpf == null) {
+			throw new IllegalArgumentException("Erro no pagamento de conta: cpf nao pode ser vazio ou nulo.");
+		}else if(cpf.length() != 11) {
+			throw new IllegalArgumentException("Erro no pagamento de conta: cpf invalido.");
+		}else if (fornecedor.equals("") || fornecedor == null) {
+			throw new IllegalArgumentException("Erro no pagamento de conta: fornecedor nao pode ser vazio ou nulo.");
+		}else if(!existe) {
+			throw new IllegalArgumentException("Erro no pagamento de conta: cliente nao existe.");
+		}else if(!this.fornecedores.containsKey(fornecedor)) {
+			throw new IllegalAccessError("Erro no pagamento de conta: fornecedor nao existe.");
+		}
+		return this.fornecedores.get(fornecedor).pagaDebito(cpf);
+	}
+
+	public String ordenarPor(String criterio) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

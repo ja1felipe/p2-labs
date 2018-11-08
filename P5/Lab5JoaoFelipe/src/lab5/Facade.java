@@ -248,8 +248,15 @@ public class Facade {
 		return this.sistemaFornecedores.exibeContasClientes(cpf, this.sistemaClientes.nomeCliente(cpf), this.sistemaClientes.verificaCliente(cpf));
 	}
 	
+	public boolean realizaPagamento(String cpf, String fornecedor) {
+		return this.sistemaFornecedores.pagaDebito(cpf, fornecedor, this.sistemaClientes.verificaCliente(cpf));
+	}
+	
+	public String ordenarPor(String criterio) {
+		return this.sistemaFornecedores.ordenarPor(criterio);
+	}
 	public static void main(String[] args) {
-		args = new String[] { "lab5.Facade", "Testes/use_case_1.txt", "Testes/use_case_2.txt", "Testes/use_case_3.txt", "Testes/use_case_4.txt", "Testes/use_case_5.txt" };
+		args = new String[] { "lab5.Facade", "Testes/use_case_1.txt", "Testes/use_case_2.txt", "Testes/use_case_3.txt", "Testes/use_case_4.txt", "Testes/use_case_5.txt", "Testes/use_case_6.txt" };
 		EasyAccept.main(args);
 	}	
 }

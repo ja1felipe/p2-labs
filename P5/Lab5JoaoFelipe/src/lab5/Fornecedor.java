@@ -288,6 +288,14 @@ public class Fornecedor {
 		return this.nome + " | " + this.contas.get(cpf).exibeContas();
 	}
 	
+	public boolean pagaDebito(String cpf) {
+		if (!this.contas.containsKey(cpf)) {
+			throw new IllegalAccessError("Erro no pagamento de conta: nao ha debito do cliente associado a este fornecedor.");
+		}
+		this.contas.remove(cpf);
+		return true;
+	}
+	
 	/**
 	 * Representacao do fornecedor em forma de String.
 	 * @return retorna uma representacao do fornecedor no formato NOME - EMAIL - TELEFONE
@@ -322,6 +330,8 @@ public class Fornecedor {
 			return false;
 		return true;
 	}
+
+	
 	
 	
 	
